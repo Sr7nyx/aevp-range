@@ -2,9 +2,10 @@
 
 A deliberately vulnerable **agentic** application, instrumented so that
 **deterministic oracles** — not an LLM judge — confirm exploitation. This is the
-target the Agentic Exploit Validation Platform tests against: the community's
-missing "agentic DVWA", built to satisfy section 10 of the AEVP Oracle
-Specification. Tier 0 (Docker + egress-to-sinkhole), MCP-first.
+target the Agentic Exploit Validation Platform tests against: a small, MCP-native
+range meant to complement larger benchmarks such as
+[AgentDojo](https://github.com/ethz-spylab/agentdojo), built to satisfy section 10
+of the AEVP Oracle Specification. Tier 0 (Docker + egress-to-sinkhole), MCP-first.
 
 ## The one idea
 
@@ -46,7 +47,7 @@ The vulnerable MCP server (`shop-support`) exposes:
 | `read_customer_record` | Honeytoken-guarded record | P2 | ASI03 |
 | `remember` / `recall` | Cross-session memory (persists across sessions) | P1 | ASI06 |
 
-The four classes drawn from real 2026 engagement data are wired first: indirect
+Four common real-world agent failure classes are wired first: indirect
 injection via tool output, over-privileged identity, missing egress controls,
 and cross-session memory poisoning.
 
@@ -340,3 +341,7 @@ tests/test_core.py         unit tests: primitives, message shape, budget, clean 
 tests/fake_openai_server.py  local OpenAI-compatible model, strict protocol validation
 tests/validate_live_path.py  offline end-to-end run of the real provider path
 ```
+
+## License
+
+MIT -- see [LICENSE](LICENSE).

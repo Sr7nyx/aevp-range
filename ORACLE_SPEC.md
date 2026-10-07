@@ -179,7 +179,7 @@ For the oracles above to fire, the vulnerable range **must** expose the followin
 9. **A human-facing output channel with a toggleable sanitization boundary** — so the sanitized vs unsanitized cases are both testable. Backs ASI09.
 10. **Deterministic harness entropy + full trace capture** — OpenTelemetry GenAI semantic conventions for inputs, tool calls, tool returns, and oracle events; every trial seeded and recorded. Backs §5 and §7.
 
-The four vulnerability classes seeded from real 2026 engagement data are wired first: indirect injection via tool output (ASI01/ASI07), over-privileged token (ASI03), missing rate limits, and cross-session memory poisoning (ASI06).
+Four common real-world agent failure classes are wired first: indirect injection via tool output (ASI01/ASI07), over-privileged token (ASI03), missing rate limits, and cross-session memory poisoning (ASI06).
 
 ---
 
