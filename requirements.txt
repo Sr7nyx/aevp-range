@@ -1,0 +1,2 @@
+# Runtime dependency (only one; the sinkhole and stores use the stdlib).
+mcp==1.28.1

@@ -1,0 +1,32 @@
+# AEVP Range -- Tier 0 (Docker + egress-to-sinkhole).
+#
+# The vulnerable MCP server is launched per-trial as a stdio subprocess *inside*
+# the `range` container by the victim agent, so it is not a long-running service
+# here. The sinkhole is a separate service; both containers share the _runtime
+# volume so the oracle (in `range`) reads the events the sinkhole records.
+#
+#   docker compose run --rm range          # run the campaign
+#   docker compose up sinkhole             # sinkhole only, for manual poking
+
+services:
+  sinkhole:
+    build: .
+    command: python -m aevp_range.sinkhole.http_sink
+    environment:
+      AEVP_RUNTIME: /app/_runtime
+      AEVP_SINK_HOST: 0.0.0.0
+      AEVP_SINK_PORT: "8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./_runtime:/app/_runtime
+
+  range:
+    build: .
+    depends_on:
+      - sinkhole
+    environment:
+      AEVP_RUNTIME: /app/_runtime
+      AEVP_SINK_URL: http://sinkhole:8080
+    volumes:
+      - ./_runtime:/app/_runtime
